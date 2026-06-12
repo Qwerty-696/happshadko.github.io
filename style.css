@@ -1,0 +1,418 @@
+/* iOS 26 FUTURE HOLOGRAM - GEJE REŽIMI (DARK) */
+:root {
+    --ios-bg: #030407;
+    --ios-card: rgba(13, 17, 26, 0.65);
+    --ios-accent: #8a2be2;
+    --ios-accent-glow: rgba(138, 43, 226, 0.35);
+    --ios-text: #ffffff;
+    --ios-secondary: #8e8e93;
+    --ios-blur: blur(30px);
+    --code-bg: #000000;
+    --code-text: #bf7ffb;
+    --segment-bg: rgba(255, 255, 255, 0.05);
+    --gradient-1: rgba(138, 43, 226, 0.12);
+    --gradient-2: rgba(0, 122, 255, 0.06);
+    --card-border: rgba(138, 43, 226, 0.15);
+    --btn-text: #ffffff;
+    --led-green: #34c759;
+}
+
+/* iOS 26 MINIMAL SILVER - GÜNDÜZ REŽIMI (LIGHT) */
+[data-theme="light"] {
+    --ios-bg: #f4f5f9;
+    --ios-card: rgba(255, 255, 255, 0.75);
+    --ios-accent: #5856d6;
+    --ios-accent-glow: rgba(88, 86, 214, 0.15);
+    --ios-text: #0b0b0d;
+    --ios-secondary: #6e6e73;
+    --ios-blur: blur(30px);
+    --code-bg: #e8e8ed;
+    --code-text: #5856d6;
+    --segment-bg: rgba(0, 0, 0, 0.06);
+    --gradient-1: rgba(88, 86, 214, 0.06);
+    --gradient-2: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --btn-text: #ffffff;
+    --led-green: #24b04b;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--ios-bg);
+    color: var(--ios-text);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 60px;
+    background-image: 
+        radial-gradient(circle at 10% 15%, var(--gradient-1) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, var(--gradient-2) 0%, transparent 45%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ANIMASIÝALAR (ÇYRALAR ÜÇIN) */
+@keyframes dynamicGlow {
+    0% { box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 5px rgba(138, 43, 226, 0.2); }
+    50% { box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 15px rgba(138, 43, 226, 0.6); }
+    100% { box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 5px rgba(138, 43, 226, 0.2); }
+}
+
+@keyframes ledBlink {
+    0% { opacity: 0.3; transform: scale(0.9); box-shadow: 0 0 2px var(--led-green); }
+    50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--led-green), 0 0 4px var(--led-green); }
+    100% { opacity: 0.3; transform: scale(0.9); box-shadow: 0 0 2px var(--led-green); }
+}
+
+@keyframes borderPulse {
+    0% { border-color: var(--card-border); }
+    50% { border-color: var(--ios-accent); box-shadow: inset 0 0 8px rgba(138, 43, 226, 0.2); }
+    100% { border-color: var(--card-border); }
+}
+
+@keyframes badgeGlow {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; box-shadow: 0 0 12px var(--ios-accent-glow); }
+    100% { opacity: 0.8; }
+}
+
+/* iOS Dynamic Header */
+.ios-header {
+    text-align: center;
+    padding: 40px 20px 20px 20px;
+}
+
+.dynamic-island {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 22px;
+    border-radius: 24px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: var(--ios-blur);
+    -webkit-backdrop-filter: var(--ios-blur);
+    animation: dynamicGlow 3s infinite ease-in-out;
+    margin-bottom: 15px;
+}
+
+[data-theme="light"] .dynamic-island {
+    background: rgba(0, 0, 0, 0.02);
+    animation: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Language Picker Selector */
+.lang-select {
+    background: transparent;
+    border: none;
+    color: var(--ios-accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+}
+
+.ios-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -1.2px;
+    background: linear-gradient(180deg, var(--ios-text) 30%, var(--ios-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* WAGT HASAPLAÝJY KARTY (COUNTDOWN TIMER) */
+.timer-container {
+    background: rgba(138, 43, 226, 0.06);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 12px 20px;
+    margin: 0 auto 25px auto;
+    max-width: 468px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: var(--ios-blur);
+    animation: borderPulse 4s infinite ease-in-out;
+}
+
+.timer-title {
+    font-size: 0.85rem;
+    color: var(--ios-secondary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.timer-display {
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ios-text);
+    letter-spacing: 1px;
+    background: var(--code-bg);
+    padding: 4px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+}
+
+.app-container {
+    padding: 0 16px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* iOS Segmented Control */
+.segmented-control {
+    background: var(--segment-bg);
+    padding: 4px;
+    border-radius: 16px;
+    display: flex;
+    margin-bottom: 25px;
+    border: 1px solid var(--card-border);
+}
+
+.segment-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--ios-secondary);
+    padding: 13px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.segment-btn.active {
+    background: var(--ios-card);
+    color: var(--ios-accent);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .segment-btn.active {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.tab-content {
+    display: none;
+    animation: ios26Slide 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes ios26Slide {
+    from { opacity: 0; transform: scale(0.97) translateY(12px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* KARTLAR */
+.ios-card {
+    background: var(--ios-card);
+    backdrop-filter: var(--ios-blur);
+    -webkit-backdrop-filter: var(--ios-blur);
+    border: 1px solid var(--card-border);
+    border-radius: 26px;
+    padding: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+
+.card-badge {
+    background: rgba(138, 43, 226, 0.12);
+    color: var(--ios-accent);
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid var(--card-border);
+    animation: badgeGlow 2.5s infinite ease-in-out;
+}
+
+.card-spec-list {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] .card-spec-list {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .spec-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-item .label { color: var(--ios-secondary); }
+.spec-item .value { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+/* LED LAMIJIK */
+.led-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--led-green);
+    border-radius: 50%;
+    display: inline-block;
+    animation: ledBlink 1.8s infinite ease-in-out;
+}
+
+.code-display {
+    background: var(--code-bg);
+    border-radius: 16px;
+    padding: 16px;
+    font-family: 'SF Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--code-text);
+    white-space: pre-wrap;      
+    word-break: break-all;      
+    overflow-wrap: break-word;  
+    line-height: 1.55;           
+    border: 1px solid var(--card-border);
+    margin-bottom: 20px;
+}
+
+.ios-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--ios-accent) 0%, #5856d6 100%);
+    color: var(--btn-text);
+    border: none;
+    padding: 16px;
+    border-radius: 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px var(--ios-accent-glow);
+}
+
+.ios-btn:active {
+    transform: scale(0.96);
+}
+
+/* About Section */
+.about-section {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.avatar-box {
+    width: 95px;
+    height: 95px;
+    background: linear-gradient(135deg, var(--ios-accent) 0%, #ff2d55 100%);
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 0 25px var(--ios-accent-glow);
+}
+
+.about-list {
+    background: var(--ios-card);
+    border-radius: 26px;
+    padding: 8px 0;
+    margin-top: 25px;
+    text-align: left;
+    border: 1px solid var(--card-border);
+}
+
+.about-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.95rem;
+}
+
+.about-item:last-child {
+    border-bottom: none;
+}
+
+.about-item .title { font-weight: 600; }
+.about-item .val { color: var(--ios-secondary); }
+
+/* Toast Alert */
+.ios-toast {
+    position: fixed;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ios-card);
+    backdrop-filter: var(--ios-blur);
+    -webkit-backdrop-filter: var(--ios-blur);
+    border: 1px solid var(--ios-accent);
+    color: var(--ios-text);
+    padding: 14px 30px;
+    border-radius: 35px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 15px var(--ios-accent-glow);
+    transition: top 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ios-toast.show {
+    top: 35px;
+}
